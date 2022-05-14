@@ -50,14 +50,14 @@
         </div>
         <div class="text-center">
             <a class="btn btn-primary" href="{% url "edit_user_info" user.get_username %}"
-               style="background-color: blueviolet">
+               style="background-color: purple">
                 <i class="fa-solid fa-user-pen"></i> Edit</a>
         </div>
         {% if not user.is_student %}
             <br>
             <div class="text-center">
                 <a class="btn btn-primary" href="{% url "be_student" user.get_username %}"
-                   style="background-color: blueviolet">
+                   style="background-color: purple">
                     <i class="fa-solid fa-user-graduate"></i> Be Student</a>
             </div>
         {% endif %}
@@ -65,7 +65,7 @@
             <br>
             <div class="text-center">
                 <a class="btn btn-primary" href="{% url "be_doctor" user.get_username %}"
-                   style="background-color: blueviolet">
+                   style="background-color: purple">
                     <i class="fa-solid fa-user-tie"></i> Be Doctor</a>
             </div>
         {% endif %}

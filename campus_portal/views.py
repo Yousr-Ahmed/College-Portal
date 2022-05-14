@@ -359,3 +359,15 @@ def add_course_contents(request, course_id):
                       uploaded_by=doctor).save()
         context['success'] = "Content Added successfully"
     return render(request, 'Course/add_contents.html', context)
+
+
+def about(request):
+    return render(request, 'about.html')
+
+
+def contacts(request):
+    return render(request, 'contacts.html')
+
+
+def colleges(request):
+    return render(request, 'colleges.html')
