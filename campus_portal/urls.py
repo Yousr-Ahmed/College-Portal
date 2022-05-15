@@ -4,13 +4,10 @@ from . import views
 
 # if the link =  campus_portal/user/nour  user: url endpoint, nour: URL parameter
 urlpatterns = [
-    path('', views.index, name='home'),
-    path('about', views.about, name='about'),
-    path('contacts', views.contacts, name='contacts'),
-    path('colleges', views.colleges, name='colleges'),
-    path('Login', views.login, name='Login'),
-    path('Logout', views.logout, name='Logout'),
-    path('student_signup', views.student_signup, name='student_signup'),
+    path('', views.index, name='home'), path('about', views.about, name='about'),
+    path('contacts', views.contacts, name='contacts'), path('colleges', views.colleges, name='colleges'),
+    path('about_us', views.about_us, name='about_us'), path('Login', views.login, name='Login'),
+    path('Logout', views.logout, name='Logout'), path('student_signup', views.student_signup, name='student_signup'),
     path('doctor_signup', views.doctor_signup, name='doctor_signup'),
     path('create_course', views.create_course, name='create_course'),
     path('view_courses', views.view_courses, name='view_courses'),

@@ -371,3 +371,7 @@ def contacts(request):
 
 def colleges(request):
     return render(request, 'colleges.html')
+
+
+def about_us(request):
+    return render(request, 'about_us.html')
