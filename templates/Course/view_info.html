@@ -21,19 +21,19 @@
                             <form method="get" action="{% url "enroll_in_course" course.id %}">
                                 {% if enrolled %}
                                     <h5 style="color: white">Enrolled on: {{ date_enrolled }}</h5>
-                                    <button type="submit" class="btn btn-primary disabled"
-                                            style="background-color: purple">Enrolled
+                                    <button type="submit" class="btn btn-black disabled"
+                                            style="background-color: purple;color: white">Enrolled
                                     </button>
                                     <br>
                                     <br>
-                                    <a class="btn btn-primary" style="background-color: purple"
+                                    <a class="btn btn-black" style="background-color: purple;color: white"
                                        href="{% url "view_course_contents" course.id %}">
                                         View Contents
                                     </a>
                                 {% else %}
                                     <button type="submit"
-                                            class="btn btn-primary {% if not user.is_student %}disabled{% endif %}"
-                                            style="background-color: purple">
+                                            class="btn btn-black {% if not user.is_student %}disabled{% endif %}"
+                                            style="background-color: purple;color: white">
                                         Enroll
                                     </button>
                                     {% if not user.is_student %}
@@ -47,14 +47,14 @@
                             {% if user.is_doctor %}
                                 <br>
                                 {% if not enrolled %}
-                                    <a class="btn btn-primary" style="background-color: purple"
+                                    <a class="btn btn-black" style="background-color: purple;color: white"
                                        href="{% url "view_course_contents" course.id %}">
                                         View Contents
                                     </a>
                                     <br>
                                     <br>
                                 {% endif %}
-                                <a class="btn btn-primary" style="background-color: purple"
+                                <a class="btn btn-black" style="background-color: purple;color: white"
                                    href="{% url "add_course_contents" course.id %}">
                                     Add Contents
                                 </a>
