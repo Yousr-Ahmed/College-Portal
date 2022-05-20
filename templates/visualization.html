@@ -62,6 +62,9 @@
         });
     });
 </script>
+{% students_number as sn %}
+{% doctors_number as dn %}
+{% if sn > 0 or dn > 0 %}
 <script>
     // jquery function
     $(document).ready(function () {
@@ -108,6 +111,7 @@
         });
     });
 </script>
+{% endif %}
 {% number_student_per_school as result %}
 <script>
     // jquery function
@@ -226,7 +230,11 @@
         <canvas id="GenderPieChart" width="400" height="400" style="margin: 0 auto;"></canvas>
     </div>
     <div class="col-auto">
+        {% if sn > 0 or dn > 0 %}
         <canvas id="RolePieChart" width="400" height="400" style="margin: 0 auto;"></canvas>
+        {% else %}
+            <h3 style="color: white">There is no Students or Doctors</h3>
+        {% endif %}
     </div>
     <div class="col-auto">
         <canvas id="SchoolDoughnutChart" width="400" height="400" style="margin: 0 auto;"></canvas>
