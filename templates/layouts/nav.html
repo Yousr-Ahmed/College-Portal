@@ -33,15 +33,15 @@
                         <i class='fas fa-home' style='color:#30fcfa'></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "about" %}">
+                    <a class="nav-link {% active request.path "about" %}" href="{% url "about" %}">
                         <i class='fa-solid fa-circle-info' style='color:#30fcfa'></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "contacts" %}">
+                    <a class="nav-link {% active request.path "contacts" %}" href="{% url "contacts" %}">
                         <i class='fa fa-comment' style='color:#30fcfa'></i> Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "colleges" %}">
+                    <a class="nav-link {% active request.path "colleges" %}" href="{% url "colleges" %}">
                         <i class='fas fa-user-graduate' style='color:#30fcfa'></i> Colleges</a>
                 </li>
                 <li class="nav-item dropdown">
