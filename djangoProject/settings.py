@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'campus_portal.apps.CampusPortalConfig',
+    'College_Portal.apps.CollegePortalConfig',
 
     'django.contrib.sites',
     'allauth',
@@ -176,7 +176,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'campus_portal/static/campus_portal/media/'
+MEDIA_ROOT = 'College_Portal/static/college_portal/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -184,6 +184,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom Django auth settings
 
-AUTH_USER_MODEL = 'campus_portal.User'
+AUTH_USER_MODEL = 'College_Portal.User'
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'Login'
