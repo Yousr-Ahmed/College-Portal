@@ -23,7 +23,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 ```shell
-python manage.py sqlmigrate campus_portal 0001
+python manage.py sqlmigrate College_Portal 0001
 ```
 #### Then Create a user using the bellow Command
 ```shell
@@ -52,8 +52,13 @@ python manage.py runserver 0.0.0.0:8000
 
 ### Special Thanks to @Yous10r for this beautiful design
 
-# our Model
+# Class Diagram
 
-![model_1](./images/models-1.png)
+![model](./doc/Class Diagram.jpg)
 
-![model_2](./images/models-2.png)
+# SiteMap
+
+![model](./doc/Sitemap.png)
+
+## Presentation [Link](https://prezi.com/view/Z87FluSDghddBXdlSbL9/)
+
