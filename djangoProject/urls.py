@@ -16,14 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from campus_portal import views
+from College_Portal import views
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
 
 urlpatterns = [
     path('', views.index, name='home'),
     path('admin/', admin.site.urls),
-    path('campus_portal/', include('campus_portal.urls')),
+    path('College_Portal/', include('College_Portal.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 
