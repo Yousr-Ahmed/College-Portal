@@ -54,7 +54,7 @@ python manage.py runserver 0.0.0.0:8000
 
 # Class Diagram
 
-![model](./doc/Class Diagram.jpg)
+![model](./doc/Class_Diagram.jpg)
 
 # SiteMap
 
