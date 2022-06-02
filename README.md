@@ -1,4 +1,4 @@
-# Campus-Portal
+# College-Portal
 
 ```
                  ____   ____ ____   
