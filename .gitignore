@@ -14,7 +14,7 @@ media
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
 # <django-project-name>/staticfiles/
-campus_portal/static/campus_portal/media/students_picture/
+College_Portal/static/college_portal/media/students_picture/
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -173,16 +173,16 @@ cython_debug/
 .idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
-/campus_portal/migrations/
-/campus_portal/static/campus_portal/media/
-!/campus_portal/static/campus_portal/media/avatar.png
-!/campus_portal/static/campus_portal/media/google.png
-!/campus_portal/static/campus_portal/media/hand.jpg
-!/campus_portal/static/campus_portal/media/icon.jpg
-!/campus_portal/static/campus_portal/media/meta.png
-!/campus_portal/static/campus_portal/media/Metaverse.jpg
-!/campus_portal/static/campus_portal/media/wearing.jpeg
-!/campus_portal/migrations/__init__.py
+/College_Portal/migrations/
+/College_Portal/static/college_portal/media/
+!/College_Portal/static/college_portal/media/avatar.png
+!/College_Portal/static/college_portal/media/google.png
+!/College_Portal/static/college_portal/media/hand.jpg
+!/College_Portal/static/college_portal/media/icon.jpg
+!/College_Portal/static/college_portal/media/meta.png
+!/College_Portal/static/college_portal/media/Metaverse.jpg
+!/College_Portal/static/college_portal/media/wearing.jpeg
+!/College_Portal/migrations/__init__.py
 pythonanywhere.txt
 client_secret_google.json
 client_secret_fb.json
