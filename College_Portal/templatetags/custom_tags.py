@@ -2,7 +2,7 @@ from django import template
 from ..models import Course, Student, Doctor, User, StudentRegisterCourse
 from django.db.models import Count
 from django.urls import reverse
-import seaborn as sns
+import seaborn as sns  # remove this if there is storage issue
 
 register = template.Library()
 
@@ -69,10 +69,11 @@ def name_course(course_id):
         name = ""
     return name
 
-
+# Start - remove this if there is storage issue
 @register.simple_tag
 def generate_color(palette=None, colors_number=None, alpha=1, desaturate=None):
     palette = None if palette == "" else palette
     colors = sns.color_palette(palette=palette, n_colors=colors_number, desat=desaturate)
     colors = [(round(r * 255, 2), round(g * 255, 2), round(b * 255, 2), round(alpha, 2)) for (r, g, b) in colors]
     return colors
+# Finish - remove this if there is storage issue

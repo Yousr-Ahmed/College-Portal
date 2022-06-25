@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <!-- Bootstrap core CSS -->
+    {% include "layouts/required_library.html" %}
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-dark">
+{% include "layouts/nav.html" %}
+{% include "layouts/success.html" %}
+{% include "layouts/error.html" %}
+{% load custom_tags %}
+{% number_user_per_gender as result %}
+<script>
+    // jquery function
+    $(document).ready(function () {
+        let ctx = document.getElementById('GenderPieChart').getContext('2d');
+        let Data = [{% for gender in result %}{{ gender.count }}, {% endfor %}];
+        let Label = [{% for gender in result %}
+            {% if gender.gender == "M"%}"Male",
+                {% elif gender.gender == "F"%}"Female",
+            {% endif %}
+        {% endfor %}];  //loop through queryset
+        let myChart = new Chart(ctx, {
+            type: 'pie',
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: 'cyan',
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Pie Chart: Number of Users per Gender',
+                        color: 'cyan',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            },
+            data: {
+                labels: Label,
+                datasets: [{
+                    label: '# of users per gender',
+                    data: Data,
+                    backgroundColor: [
+                        'rgba(255, 0, 0, 0.62)',
+                        'rgba(0, 0, 255, 0.62)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(0, 0, 255, 1)',
+                    ],
+                    borderWidth: 3,
+                }]
+            },
+        });
+    });
+</script>
+{% students_number as sn %}
+{% doctors_number as dn %}
+{% if sn > 0 or dn > 0 %}
+<script>
+    // jquery function
+    $(document).ready(function () {
+        let ctx = document.getElementById('RolePieChart').getContext('2d');
+        let Data = [{% doctors_number %}, {% students_number %}];
+        let Labels = ["Doctor", "Student"];
+        let myChart = new Chart(ctx, {
+            type: 'pie',
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: 'cyan',
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Pie Chart: Number of Users per Role',
+                        color: 'cyan',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            },
+            data: {
+                labels: Labels,
+                datasets: [{
+                    label: '# of users per role',
+                    data: Data,
+                    backgroundColor: [
+                        'rgba(255, 0, 0, 0.62)',
+                        'rgba(0, 0, 255, 0.62)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(0, 0, 255, 1)',
+                    ],
+                    borderWidth: 3,
+                }]
+            },
+        });
+    });
+</script>
+{% endif %}
+{% number_student_per_school as result %}
+<script>
+    // jquery function
+    $(document).ready(function () {
+        let ctx = document.getElementById('SchoolDoughnutChart').getContext('2d');
+        let Data = [{% for school in result %}
+            {% if school.school != ""%}
+                "{{ school.count }}",
+            {% endif %}
+        {% endfor %}];
+        let Labels = [{% for school in result %}
+            {% if school.school != ""%}
+                "{{ school.school }}",
+            {% endif %}
+        {% endfor %}]; //loop through queryset
+        let myChart = new Chart(ctx, {
+            type: 'doughnut',
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: 'cyan',
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Doughnut Chart: Number of Students per School',
+                        color: 'cyan',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            },
+            data: {
+                labels: Labels,
+                datasets: [{
+                    label: '# of students per school',
+                    data: Data,
+                    backgroundColor: [
+                        'rgba(255, 0, 0, 0.62)',
+                        'rgba(0, 255, 255, 0.62)',
+                        'rgba(255, 255, 0, 0.62)',
+                        'rgba(0, 255, 0, 0.62)',
+                        'rgba(0, 0, 255, 0.62)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(0, 255, 255, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(0, 255, 0, 1)',
+                        'rgba(0, 0, 255, 1)',
+                    ],
+                    borderWidth: 3,
+                }]
+            },
+        });
+    });
+</script>
+{% number_student_per_course as number_student_per_course %}
+<div id="plot" hidden></div>
+<py-env>
+    - seaborn
+</py-env>
+<py-script output="plot">
+import seaborn as sns
+def generate_color(palette=None, colors_number=None, alpha=1, desaturate=None):
+    palette = None if palette == "" else palette
+    colors = sns.color_palette(palette=palette, n_colors=colors_number, desat=desaturate)
+    colors = [[round(r * 255, 2), round(g * 255, 2), round(b * 255, 2), round(alpha, 2)] for (r, g, b) in colors]
+    return colors
+result = generate_color(palette="bright", colors_number=100, alpha=1)
+print(result)
+</py-script>
+<script>
+    // jquery function
+    $(document).ready(function () {
+        let generated_colors;
+        let changeCheck = document.querySelector('#plot'); // get the element
+        let oL = changeCheck.innerHTML; // load the default values
+        let check = setInterval(() => {
+            if (changeCheck.innerHTML !== oL) { // if the values are different from the values on load
+                generated_colors = document.getElementById('plot-1').textContent;
+                generated_colors = JSON.parse(generated_colors);
+                let BackgroundColor = [];
+                for(let [r,g,b,a] of generated_colors){
+                    BackgroundColor.push("rgba("+r+","+g+","+b+","+a+")");
+                };
+                let BorderColor = [];
+                for(let [r,g,b,a] of generated_colors){
+                    BorderColor.push("rgba("+r+","+g+","+b+","+.8+")");
+                };
+                let ctx = document.getElementById('CourseDoughnutChart').getContext('2d');
+                let Data = [{% for course_number_student in number_student_per_course %}{{ course_number_student.count }}, {% endfor %}];
+                let Labels = [{% for course_number_student in number_student_per_course %}
+                    "{% name_course course_number_student.course %}",
+                {% endfor %}]; //loop through queryset
+                {% courses_number as courses_number %}
+                console.log(BackgroundColor);
+                console.log(BorderColor);
+                let myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: 'cyan',
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Doughnut Chart: Number of Students per Course',
+                                color: 'cyan',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        }
+                    },
+                    data: {
+                        labels: Labels,
+                        datasets: [{
+                            label: '# of students per course',
+                            data: Data,
+                            backgroundColor: BackgroundColor,
+                            borderColor: BorderColor,
+                            borderWidth: 3,
+                        }]
+                    },
+                });
+                clearTimeout(check);	// clear the interval so that it does not repeat itself
+            }
+        }, 100); // this will check the element every second
+
+    });
+</script>
+
+<!-- displaying the chart -->
+<!-- you can also play around with the width and height to increase or decrease the chart size -->
+<h4 class="text-info text-center"> Number of Users: {% users_number %}</h4>
+<div class="d-flex flex-row align-items-center justify-content-between flex-wrap">
+    <div class="col-auto">
+        <canvas id="GenderPieChart" width="400" height="400" style="margin: 0 auto;"></canvas>
+    </div>
+    <div class="col-auto">
+        {% if sn > 0 or dn > 0 %}
+        <canvas id="RolePieChart" width="400" height="400" style="margin: 0 auto;"></canvas>
+        {% else %}
+            <h3 style="color: white">There is no Students or Doctors</h3>
+        {% endif %}
+    </div>
+    <div class="col-auto">
+        <canvas id="SchoolDoughnutChart" width="400" height="400" style="margin: 0 auto;"></canvas>
+    </div>
+</div>
+{% courses_number as courses_number %}
+{% if courses_number > 0 %}
+    <br>
+    <h4 class="text-info text-center"> Number of Courses: {{ courses_number }}</h4>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <canvas id="CourseDoughnutChart" width="400" height="400" style="margin: 0 auto;"></canvas>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endif %}
+{% include "layouts/footer.html" %}
+</body>
+</html>
