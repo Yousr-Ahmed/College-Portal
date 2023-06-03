@@ -1,4 +1,4 @@
-# I create UI for this project
+# I Create UI for this Project
 # College-Portal
 
 ```
